@@ -34,4 +34,17 @@ public class ReservaController extends BaseController<ReservaDTO> {
         return service.listaPorAmbiente(ambienteId);
     }
 
+    @GetMapping("/por-usuario/{usuario}")
+    public List<ReservaDTO> reservaPorUsuario(
+            @PathVariable("usuario") String usuario) {
+
+        return service.listaPorUsuario(usuario);
+
+    }
+
+    @GetMapping("/calendario")
+    public List<ReservaDTO> calendario(){
+        return service.calendario();
+    }
+
 }

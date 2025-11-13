@@ -40,4 +40,13 @@ public interface ReservaRepository extends BaseRepository<Reserva, Long> {
             """)
     List<Reserva> findByAmbiente(Long ambienteId);
 
+
+    @Query("""
+            SELECT r
+            FROM Reserva r
+            WHERE r.ativo = true
+            AND r.nome = :usuario
+            """)
+    List<Reserva> findByUsuario(String usuario);
+
 }

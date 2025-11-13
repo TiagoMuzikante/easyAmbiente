@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,7 +39,7 @@ public class ReservaDTO {
     private Ambiente ambiente;
 
     @AssertTrue(message = "A data de inicio deve ser antes da data fim")
-    public boolean periodoValido(){
+    public boolean isPeriodoValido(){
         return dataInicio.isBefore(dataFim);
     }
 

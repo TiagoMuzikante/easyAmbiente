@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,6 +27,37 @@ public class ReservaService extends BaseService<Reserva, ReservaDTO> {
     protected ReservaService(ReservaRepository repository) {
         super(repository);
         this.repository = repository;
+    }
+
+    public List<ReservaDTO> calendario(){
+        //Pegar a data ATUAL
+        LocalDate agora = LocalDate.now();
+
+        LocalDateTime inicioDaSemana = agora.with(DayOfWeek.MONDAY).atStartOfDay();
+        LocalDateTime fimDaSemana = inicioDaSemana.plusDays(6)
+                .withHour(23)
+                .withMinute(59)
+                .withSecond(59);    
+        
+        List<Reserva> reservas = repository.findByDatas(inicioDaSemana, fimDaSemana);
+
+        List<ReservaDTO> dtos = new ArrayList<>();
+        for (Reserva reserva : reservas) {
+            dtos.add(super.toDto(reserva));
+        }
+        return dtos;
+    }
+
+    public List<ReservaDTO> listaPorUsuario(String nome){
+        List<Reserva> reservas = repository.findByUsuario(nome);
+
+        List<ReservaDTO> dtos = new ArrayList<>();
+
+        for (Reserva reserva : reservas) {
+            dtos.add(super.toDto(reserva));
+        }
+
+        return dtos;
     }
 
     public List<ReservaDTO> listaPorAmbiente(Long id){
