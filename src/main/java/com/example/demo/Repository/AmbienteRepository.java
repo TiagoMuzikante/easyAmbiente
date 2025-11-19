@@ -5,9 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.Entity.Ambiente;
 
+import java.util.List;
+
 @Repository                                                 //X        Y
 public interface AmbienteRepository extends BaseRepository<Ambiente, Long> {
-
 
     @Query("""
         SELECT COUNT(r) > 0

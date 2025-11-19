@@ -1,12 +1,13 @@
 package com.example.demo.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -27,5 +28,14 @@ public class Ambiente extends BaseEntity {
 
     @Column(nullable = false)
     private int capacidade = 1;
+
+    @Column(nullable = true)
+    @ManyToMany
+    @JoinTable(name = "ambiente_recurso", joinColumns = @JoinColumn(name = "ambiente_id"), inverseJoinColumns = @JoinColumn(name = "recurso_id"))
+    private Set<Recurso> recursos;
+
+    public void addResource(Recurso resource){
+        this.recursos.add(resource);
+    }
 
 }

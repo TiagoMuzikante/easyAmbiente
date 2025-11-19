@@ -1,5 +1,8 @@
 package com.example.demo.DTO;
 
+import com.example.demo.Entity.Recurso;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotBlank;
@@ -7,6 +10,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,4 +32,8 @@ public class AmbienteDTO {
 
     @NotNull(message = "O campo capacidade deve ser preenchido")
     private int capacidade;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private List<Recurso> recursos;
+
 }
